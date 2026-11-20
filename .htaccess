@@ -1,0 +1,5 @@
+Options -Indexes
+# ไฟล์ตั้งค่า/SQL/เอกสาร ห้ามเปิดจากเว็บ
+<FilesMatch "^(config(\.local)?\.php|bootstrap\.php|database\.sql|README\.md|\.gitignore)$">
+    Require all denied
+</FilesMatch>

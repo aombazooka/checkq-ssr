@@ -1,0 +1,8 @@
+# ค่าลับ (รหัสฐานข้อมูล HOSxP, client secret ของ SSO)
+config.local.php
+sso/config.local.php
+sso/storage/*.json
+
+# แคชข้อมูลจาก HOSxP — มี HN และชื่อผู้ป่วย ห้ามขึ้น git
+storage/*
+!storage/.htaccess

@@ -1,0 +1,433 @@
+/* ระบบคิวแพทย์ — ต่อยอดจาก ui/ (โทนสี ปุ่ม ช่องกรอก มาจาก ui-theme.css) */
+:root {
+    --cq-g: #1F9D6B; --cq-g-bg: #E6F5EE;
+    --cq-y: #C98A0B; --cq-y-bg: #FDF4E1;
+    --cq-r: #D23B3B; --cq-r-bg: #FCEBEB;
+    --cq-x: #9AA6A2; --cq-x-bg: #F1F3F2;
+}
+body { font-family: "Sarabun", system-ui, sans-serif; background: var(--ui-ground); color: var(--ui-ink); margin: 0; }
+.cq-main { box-sizing: border-box; width: 100%; max-width: 1040px; margin: 0 auto; padding: 24px 16px 40px; }
+.cq-main.wide { max-width: 1400px; }
+.cq-muted { color: var(--ui-muted); }
+.cq-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.cq-gap { margin: 12px 0; }
+.cq-inline { display: inline-flex; margin: 0; }
+.cq-code { display: inline-block; min-width: 2.6em; padding: 1px 6px; border-radius: 6px; background: var(--ui-line-soft); font-size: .85em; font-weight: 600; text-align: center; color: var(--ui-ink-2); }
+
+.cq-head { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: flex-end; justify-content: space-between; margin-bottom: 16px; }
+.cq-head .ui-page-sub { margin-bottom: 0; }
+.cq-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.cq-banner { margin: 0 0 14px; padding: 10px 14px; border-radius: 12px; background: #EEF0FB; color: #333A8F; font-size: 14px; }
+.cq-banner.err { background: var(--cq-r-bg); color: #8F1D14; }
+.cq-banner a { color: inherit; font-weight: 600; }
+.cq-empty { text-align: center; padding: 36px 20px; }
+
+/* สถานะสด */
+.cq-live { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 15px; }
+.cq-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--cq-g); box-shadow: 0 0 0 0 rgba(31,157,107,.5); animation: cq-pulse 2s infinite; }
+@keyframes cq-pulse { 70% { box-shadow: 0 0 0 8px rgba(31,157,107,0); } 100% { box-shadow: 0 0 0 0 rgba(31,157,107,0); } }
+@media (prefers-reduced-motion: reduce) { .cq-dot { animation: none; } }
+
+/* แท็บคลินิก */
+.cq-tabs { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 10px; margin-bottom: 8px; scrollbar-width: thin; }
+.cq-tab { flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1px solid var(--ui-line); border-radius: 22px; background: var(--ui-surface); color: var(--ui-ink-2); text-decoration: none; font-size: 15px; white-space: nowrap; }
+.cq-tab:hover { border-color: var(--ui-primary); }
+.cq-tab.on { background: var(--ui-primary); border-color: var(--ui-primary); color: #fff; }
+.cq-tab-code { font-weight: 700; }
+.cq-tab-n { min-width: 22px; padding: 1px 7px; border-radius: 11px; background: var(--ui-line-soft); color: var(--ui-ink); font-weight: 700; font-size: 13px; text-align: center; }
+.cq-tab.on .cq-tab-n { background: rgba(255,255,255,.22); color: #fff; }
+.cq-tab-u { padding: 1px 7px; border-radius: 11px; background: var(--cq-y); color: #fff; font-weight: 700; font-size: 13px; }
+
+/* แถบแนะนำ */
+.cq-hero { display: block; margin-bottom: 14px; border-radius: 18px; overflow: hidden; border: 1px solid var(--ui-line); background: var(--ui-surface); }
+.cq-hero-main { padding: 22px 24px; background: linear-gradient(135deg, var(--ui-primary) 0%, var(--ui-primary-hover) 100%); color: #fff; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.cq-hero-main.warn { background: linear-gradient(135deg, #B7791F 0%, #975A16 100%); }
+.cq-hero-main.none { background: #5B6763; }
+.cq-hero-label { font-size: 15px; opacity: .9; }
+.cq-hero-name { font-size: clamp(26px, 3.4vw, 38px); font-weight: 700; line-height: 1.2; }
+.cq-hero-why { font-size: 16px; opacity: .95; }
+.cq-hero-btn.ui-btn.primary { margin-top: 10px; min-height: 52px; padding: 0 22px; font-size: 18px; background: #fff; border-color: #fff; color: var(--ui-primary-ink); }
+.cq-hero-btn.ui-btn.primary:hover { background: var(--ui-primary-tint); color: var(--ui-primary-ink); }
+.cq-hero-side { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; }
+.cq-stat { display: flex; align-items: center; gap: 12px; }
+.cq-stat b { font-size: 34px; line-height: 1; color: var(--cq-y); min-width: 1.2em; }
+.cq-stat span { font-size: 14px; color: var(--ui-muted); line-height: 1.4; }
+.cq-hn { display: flex; flex-direction: column; gap: 6px; margin: 0; }
+.cq-hn > label { font-size: 14px; font-weight: 600; color: var(--ui-ink-2); }
+.cq-hn-row { display: flex; gap: 6px; }
+.cq-hn-row .ui-input { flex: 1; min-width: 0; }
+.cq-hn-result { display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+.cq-hn-name { font-weight: 600; }
+.cq-hn-app { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; padding: 10px 12px; border-radius: 12px; background: var(--ui-line-soft); }
+.cq-hn-app.fixed { background: var(--cq-y-bg); }
+.cq-hn-doc { font-weight: 700; }
+.cq-hn-err { color: var(--cq-r); }
+
+/* การ์ดแพทย์ */
+.cq-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 4px 0 12px; font-size: 13px; color: var(--ui-muted); }
+.cq-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.cq-sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.cq-sw.g { background: var(--cq-g); } .cq-sw.y { background: var(--cq-y); } .cq-sw.r { background: var(--cq-r); } .cq-sw.x { background: var(--cq-x); }
+.cq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.cq-card { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 16px; background: var(--ui-surface); border: 1px solid var(--ui-line); border-top: 5px solid var(--cq-g); }
+.cq-card.y { border-top-color: var(--cq-y); } .cq-card.r { border-top-color: var(--cq-r); }
+.cq-card.x { border-top-color: var(--cq-x); background: var(--cq-x-bg); color: var(--ui-muted); }
+.cq-card.pick { box-shadow: 0 0 0 3px var(--ui-primary-tint), 0 6px 18px rgba(11,107,93,.12); border-color: var(--ui-primary); }
+.cq-card-head { display: flex; justify-content: space-between; gap: 8px; align-items: flex-start; }
+.cq-card-title h3 { margin: 0; font-size: 17px; line-height: 1.35; }
+.cq-card-title div { font-size: 14px; }
+.cq-nums { display: flex; justify-content: space-between; align-items: flex-end; gap: 8px; }
+.cq-big { display: flex; flex-direction: column; }
+.cq-big b { font-size: 40px; line-height: 1; }
+.cq-big span { font-size: 13px; color: var(--ui-muted); }
+.cq-small { text-align: right; font-size: 13px; color: var(--ui-muted); line-height: 1.55; }
+.cq-bar { height: 8px; border-radius: 4px; background: var(--ui-line-soft); overflow: hidden; }
+.cq-bar i { display: block; height: 100%; background: var(--cq-g); border-radius: 4px; transition: width .4s; }
+.cq-card.y .cq-bar i { background: var(--cq-y); } .cq-card.r .cq-bar i { background: var(--cq-r); } .cq-card.x .cq-bar i { background: var(--cq-x); }
+.cq-quota { font-size: 14px; }
+.cq-card.r .cq-quota { color: var(--cq-r); font-weight: 600; }
+.cq-send { justify-content: center; }
+
+/* popup ส่งคนไข้ */
+.cq-assign { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; padding: 14px 16px; margin-bottom: 14px; border-radius: 14px; background: var(--ui-primary-tint); }
+.cq-assign-name { font-size: 24px; font-weight: 700; color: var(--ui-primary-ink); }
+.cq-assign-room { font-size: 17px; font-weight: 600; }
+
+/* ตารางโควต้า */
+.cq-card-wrap { background: var(--ui-surface); border: 1px solid var(--ui-line); border-radius: 16px; }
+.ui-table th.num, .ui-table td.num { text-align: center; }
+.cq-zero { color: var(--ui-field); }
+.cq-row-actions { white-space: nowrap; text-align: right; }
+.cq-row-actions .ui-btn { min-height: 38px; }
+.cq-fs { border: 0; padding: 0; margin: 18px 0 0; min-width: 0; }
+.cq-fs legend { margin-bottom: 10px; padding: 0; }
+.cq-days { display: flex; flex-wrap: wrap; gap: 8px; }
+.cq-day input { position: absolute; opacity: 0; pointer-events: none; }
+.cq-day span { display: inline-flex; align-items: center; justify-content: center; min-width: 48px; min-height: 44px; padding: 0 10px; border: 1px solid var(--ui-field); border-radius: 22px; cursor: pointer; font-weight: 600; color: var(--ui-ink-2); background: var(--ui-surface); }
+.cq-day input:checked + span { background: var(--ui-primary); border-color: var(--ui-primary); color: #fff; }
+.cq-day input:focus-visible + span { outline: 3px solid var(--ui-focus); outline-offset: 2px; }
+.cq-fill { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; padding: 10px 12px; border-radius: 12px; background: var(--ui-line-soft); font-size: 14px; }
+.cq-fill .ui-input { width: 90px; }
+.cq-qgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; }
+.cq-qgrid .ui-input { text-align: center; font-size: 18px; font-weight: 600; }
+
+.cq-noplan h2 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cq-noplan-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.cq-noplan-list .ui-btn { min-height: 40px; }
+
+/* เวรแพทย์ */
+.cq-daynav { display: flex; gap: 6px; align-items: center; }
+.cq-daynav .ui-input { min-height: 44px; }
+.cq-duty-clinic { margin-bottom: 18px; }
+.cq-duty-h { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; font-size: 18px; }
+.cq-duty-row { display: grid; grid-template-columns: minmax(180px, 1.2fr) auto minmax(0, 1.6fr) minmax(160px, 1fr); gap: 10px 14px; align-items: center; padding: 12px 14px; margin-bottom: 8px; border-radius: 14px; background: var(--ui-surface); border: 1px solid var(--ui-line); border-left: 5px solid var(--cq-g); transition: opacity .2s; }
+.cq-duty-row.s-leave, .cq-duty-row.s-meeting { border-left-color: var(--cq-x); background: var(--cq-x-bg); }
+.cq-duty-row.s-leave .cq-pills, .cq-duty-row.s-meeting .cq-pills { opacity: .45; }
+.cq-duty-row.saving { opacity: .7; }
+.cq-duty-doc { display: flex; flex-direction: column; }
+.cq-seg { display: inline-flex; border: 1px solid var(--ui-field); border-radius: 22px; overflow: hidden; }
+.cq-seg-btn { min-height: 40px; padding: 0 14px; border: 0; background: var(--ui-surface); font: inherit; font-size: 15px; cursor: pointer; color: var(--ui-ink-2); }
+.cq-seg-btn + .cq-seg-btn { border-left: 1px solid var(--ui-line); }
+.cq-seg-btn[aria-checked="true"][data-status="on"] { background: var(--cq-g); color: #fff; font-weight: 600; }
+.cq-seg-btn[aria-checked="true"][data-status="leave"] { background: #6B7774; color: #fff; font-weight: 600; }
+.cq-seg-btn[aria-checked="true"][data-status="meeting"] { background: var(--cq-y); color: #fff; font-weight: 600; }
+.cq-seg-btn:focus-visible, .cq-pill:focus-visible { outline: 3px solid var(--ui-focus); outline-offset: 1px; }
+.cq-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.cq-pill { min-height: 36px; padding: 0 10px; border-radius: 18px; border: 1px solid var(--cq-g); background: var(--cq-g-bg); color: #13603F; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.cq-pill small { font-weight: 400; opacity: .8; }
+.cq-pill[aria-pressed="false"] { border-style: dashed; border-color: var(--ui-field); background: transparent; color: var(--ui-muted); text-decoration: line-through; }
+.cq-note .ui-input { width: 100%; min-height: 40px; box-sizing: border-box; }
+
+/* popup เพิ่มเข้าเวร */
+.cq-picklist { display: flex; flex-direction: column; gap: 6px; max-height: 50vh; overflow: auto; }
+.cq-picklist-h { margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--ui-muted); }
+.cq-pick { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border: 1px solid var(--ui-line); border-radius: 12px; cursor: pointer; }
+.cq-pick:has(input:checked) { border-color: var(--ui-primary); background: var(--ui-primary-tint); }
+.cq-pick input { width: 18px; height: 18px; accent-color: var(--ui-primary); }
+.cq-pick span { display: flex; flex-direction: column; }
+
+/* สรุป */
+.cq-sum { margin-bottom: 22px; }
+.cq-sumtable td.full { color: var(--cq-y); font-weight: 600; }
+.cq-sumtable td.over { color: var(--cq-r); font-weight: 700; background: var(--cq-r-bg); }
+.cq-sumtable .now { background: var(--ui-primary-tint); }
+.cq-sumtable tfoot th { border-top: 1px solid var(--ui-line); color: var(--ui-ink); font-weight: 700; }
+.cq-off td { color: var(--ui-muted); }
+
+@media (max-width: 860px) {
+    .cq-duty-row { grid-template-columns: 1fr; }
+}
+
+/* จุดคัดกรอง: ซ้ายรายชื่อคนไข้ ขวาแพทย์ */
+.cq-layout { display: grid; grid-template-columns: minmax(280px, 340px) minmax(0, 1fr); gap: 16px; align-items: start; }
+.cq-right { min-width: 0; }
+.cq-queue { position: sticky; top: 76px; display: flex; flex-direction: column; max-height: calc(100vh - 96px); background: var(--ui-surface); border: 1px solid var(--ui-line); border-radius: 18px; overflow: hidden; }
+.cq-queue-head { display: flex; flex-direction: column; gap: 10px; padding: 14px 14px 10px; border-bottom: 1px solid var(--ui-line-soft); }
+.cq-queue-head h2 { margin: 0; font-size: 17px; }
+.cq-qtabs { display: flex; }
+.cq-qtabs .cq-seg-btn { flex: 1; }
+.cq-qtabs .cq-seg-btn b { margin-left: 4px; padding: 0 7px; border-radius: 10px; background: var(--ui-line-soft); color: var(--ui-ink); font-size: 13px; }
+.cq-qtabs .cq-seg-btn[aria-selected="true"] { background: var(--ui-primary); color: #fff; font-weight: 600; }
+.cq-qtabs .cq-seg-btn[aria-selected="true"] b { background: rgba(255,255,255,.25); color: #fff; }
+.cq-list { list-style: none; margin: 0; padding: 6px; overflow-y: auto; flex: 1; min-height: 120px; }
+.cq-list-empty { padding: 24px 12px; text-align: center; color: var(--ui-muted); font-size: 14px; }
+.cq-pt { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; margin-bottom: 4px; border-radius: 12px; border: 2px solid transparent; cursor: pointer; }
+.cq-pt:hover { background: var(--ui-line-soft); }
+.cq-pt:focus-visible { outline: 3px solid var(--ui-focus); outline-offset: 0; }
+.cq-pt.sel { background: var(--ui-primary-tint); border-color: var(--ui-primary); }
+.cq-pt.sent { cursor: default; }
+.cq-pt.sent:hover { background: none; }
+.cq-pt.old { opacity: .55; }
+.cq-pt-top { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.cq-pt-hn { font-size: 17px; letter-spacing: .3px; }
+.cq-pt-time { font-size: 13px; color: var(--ui-muted); white-space: nowrap; }
+.cq-pt-name { font-size: 15px; color: var(--ui-ink-2); }
+.cq-pt-doc { font-size: 13px; color: var(--ui-primary-ink); font-weight: 600; }
+.cq-queue-foot { margin: 0; padding: 8px 14px 12px; font-size: 13px; }
+.cq-queue-foot:empty { display: none; }
+.cq-hero-main.has-pt .cq-hero-label { font-size: 17px; font-weight: 600; opacity: 1; }
+@media (max-width: 960px) {
+    .cq-layout { grid-template-columns: 1fr; }
+    .cq-queue { position: static; max-height: none; }
+    .cq-list { max-height: 50vh; }
+}
+.cq-assign-pt { margin-bottom: 10px; padding: 10px 14px; border-radius: 12px; background: var(--ui-line-soft); font-size: 16px; }
+.cq-assign-warn { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 10px; padding: 10px 12px; border-radius: 12px; background: var(--cq-y-bg); color: #6E3B06; font-size: 15px; } .cq-assign-warn svg { flex: none; margin-top: 2px; }
+.cq-hero-btn.need.ui-btn.primary { background: rgba(255,255,255,.14); border: 2px dashed rgba(255,255,255,.7); color: #fff; }
+.cq-hero-btn.need.ui-btn.primary:hover { background: rgba(255,255,255,.24); color: #fff; }
+.cq-queue.flash { animation: cq-flash .9s ease-out 2; }
+@keyframes cq-flash { 0% { box-shadow: 0 0 0 0 rgba(11,107,93,.55); } 100% { box-shadow: 0 0 0 10px rgba(11,107,93,0); } }
+@media (prefers-reduced-motion: reduce) { .cq-queue.flash { animation: none; outline: 3px solid var(--ui-focus); } }
+
+/* คิวรายแพทย์ */
+.cq-qsum { margin: 0 0 12px; font-size: 15px; color: var(--ui-ink-2); }
+.cq-qsum b { font-size: 20px; color: var(--ui-ink); }
+.cq-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 12px; align-items: start; }
+.cq-col { display: flex; flex-direction: column; background: var(--ui-surface); border: 1px solid var(--ui-line); border-top: 5px solid var(--cq-g); border-radius: 16px; overflow: hidden; scroll-margin-top: 80px; }
+.cq-col.unassigned { border-top-color: var(--cq-y); background: #FFFCF5; }
+.cq-col.off { border-top-color: var(--cq-x); background: var(--cq-x-bg); }
+.cq-col.nodut { border-top-color: #7A6FD0; }
+.cq-col.pick { box-shadow: 0 0 0 3px var(--ui-primary-tint); }
+.cq-col.focus { box-shadow: 0 0 0 3px var(--ui-focus); }
+.cq-col-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; padding: 12px 14px 6px; }
+.cq-col-title h2 { margin: 0; font-size: 16px; line-height: 1.35; }
+.cq-col-title div { font-size: 13px; }
+.cq-col-n { display: flex; flex-direction: column; align-items: flex-end; line-height: 1; }
+.cq-col-n b { font-size: 30px; }
+.cq-col-n span { font-size: 12px; color: var(--ui-muted); margin-top: 2px; }
+.cq-col-meta { padding: 0 14px 8px; font-size: 13px; color: var(--ui-muted); }
+.cq-col-list { list-style: none; margin: 0; padding: 0 8px 8px; max-height: 60vh; overflow-y: auto; }
+.cq-col-empty { padding: 14px 8px; text-align: center; font-size: 14px; color: var(--ui-muted); }
+.cq-qp { display: flex; gap: 10px; padding: 8px; border-top: 1px solid var(--ui-line-soft); }
+.cq-qp:first-child { border-top: 0; }
+.cq-qp-no { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--ui-line-soft); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--ui-ink-2); }
+.cq-qp:first-child .cq-qp-no { background: var(--ui-primary); color: #fff; }
+.cq-col.unassigned .cq-qp:first-child .cq-qp-no { background: var(--cq-y); }
+.cq-qp-body { min-width: 0; flex: 1; }
+.cq-qp-top { display: flex; justify-content: space-between; gap: 6px; font-size: 15px; }
+.cq-qp-q { font-size: 13px; font-weight: 600; color: var(--ui-primary-ink); white-space: nowrap; }
+.cq-qp-name { font-size: 14px; color: var(--ui-ink-2); }
+.cq-qp-time { font-size: 12px; color: var(--ui-muted); }
+.cq-qp.old { opacity: .55; }
+.cq-qp.pend .cq-qp-time { color: #6E3B06; }
+.cq-card-link { font-size: 14px; color: var(--ui-primary-ink); font-weight: 600; text-decoration: none; }
+.cq-card-link:hover { text-decoration: underline; }
+.cq-pt-q { font-weight: 600; color: var(--ui-primary-ink); }
+.cq-hidden-note { margin: 12px 0 0; font-size: 14px; color: var(--ui-muted); } .cq-hidden-note a { color: var(--ui-primary-ink); font-weight: 600; }
+.cq-qsum a { color: var(--ui-primary-ink); font-weight: 600; margin-left: 4px; }
+.cq-qgrid { grid-template-columns: repeat(auto-fill, minmax(122px, 1fr)); }
+.cq-qlabel { font-size: 14px; font-weight: 500; color: var(--ui-ink-2); }
+.cq-qbreak-box { display: flex; align-items: center; justify-content: center; min-height: 46px; border: 1px dashed var(--ui-field); border-radius: 12px; background: var(--ui-line-soft); color: var(--ui-muted); font-weight: 600; }
+.cq-th-slot { white-space: normal !important; min-width: 64px; line-height: 1.3; }
+.cq-th-slot.brk, td.cq-brk { background: var(--ui-line-soft); color: var(--ui-muted); }
+.cq-qgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px 8px; }
+.cq-qgrid .ui-field > label, .cq-qgrid .cq-qlabel { font-size: 13px; white-space: nowrap; }
+@media (max-width: 520px) { .cq-qgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.cq-qtable td:first-child, .cq-qtable td:nth-child(2) { white-space: nowrap; }
+.cq-duty-row.s-off { border-left-color: var(--ui-line); background: var(--ui-surface); }
+.cq-duty-row.s-off .cq-duty-doc b { color: var(--ui-muted); font-weight: 500; }
+.cq-duty-row.s-off .cq-pills { opacity: .45; }
+.cq-seg-btn[aria-checked="true"][data-status="off"] { background: #DCE3E0; color: var(--ui-ink-2); font-weight: 600; }
+.cq-col.room { border-top-color: var(--ui-primary); }
+.cq-col.room .cq-col-title h2 { font-size: 19px; }
+.cq-col.room.empty { border-top-style: dashed; border-top-color: var(--ui-field); background: var(--ui-ground); }
+.cq-room-pick { padding: 0 12px 8px; }
+.cq-room-pick .ui-input { width: 100%; min-height: 42px; font-size: 15px; font-weight: 600; box-sizing: border-box; }
+.cq-col.room.empty .cq-room-pick .ui-input { font-weight: 400; color: var(--ui-muted); }
+.cq-room-doc { padding: 0 14px 8px; font-weight: 600; }
+.cq-cols.rooms { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+
+/* ===== คิวรายแพทย์ (มุมมองห้องตรวจ) ===== */
+.cq-stats2 { display: flex; flex-wrap: wrap; gap: 10px; margin: 2px 0 12px; }
+.cq-stat2 { display: flex; align-items: baseline; gap: 8px; padding: 8px 14px; border-radius: 12px; background: var(--ui-surface); border: 1px solid var(--ui-line); }
+.cq-stat2 b { font-size: 22px; line-height: 1; }
+.cq-stat2 span { font-size: 13px; color: var(--ui-muted); }
+.cq-stat2.warn { background: var(--cq-y-bg); border-color: #F1D9A8; }
+.cq-stat2.warn b { color: #9A5B07; }
+
+.cq-waitstrip { margin-bottom: 14px; font-size: 14px; color: var(--ui-muted); }
+.cq-waitstrip.has { padding: 12px 14px; border-radius: 16px; background: var(--cq-y-bg); border: 1px solid #F1D9A8; color: var(--ui-ink); }
+.cq-waitstrip-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.cq-waitstrip-head b { color: #7A4508; font-size: 15px; }
+.cq-waitstrip-head a { color: var(--ui-primary-ink); font-weight: 600; text-decoration: none; }
+.cq-waitstrip-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.cq-waitstrip-list li { display: inline-flex; gap: 6px; align-items: baseline; padding: 5px 10px; border-radius: 10px; background: #fff; border: 1px solid #F1D9A8; font-size: 13px; }
+.cq-waitstrip-list li b { color: #9A5B07; }
+.cq-waitstrip-list li.old { opacity: .55; }
+
+.cq-roomgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; align-items: start; }
+@media (min-width: 1200px) {
+    .cq-roomgrid.n5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .cq-roomgrid.n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .cq-roomgrid.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .cq-roomgrid.n6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+.cq-room { display: flex; flex-direction: column; min-width: 0; background: var(--ui-surface); border: 1px solid var(--ui-line); border-radius: 20px; box-shadow: 0 1px 2px rgba(16,40,35,.04), 0 6px 18px rgba(16,40,35,.05); overflow: hidden; scroll-margin-top: 90px; }
+.cq-room.pick { border-color: var(--ui-primary); box-shadow: 0 0 0 3px var(--ui-primary-tint), 0 6px 18px rgba(11,107,93,.10); }
+.cq-room.paused { background: var(--cq-x-bg); }
+.cq-room.focus { box-shadow: 0 0 0 3px var(--ui-focus); }
+.cq-room.empty { background: transparent; border: 2px dashed var(--ui-line); box-shadow: none; }
+.cq-room-head { display: flex; align-items: flex-start; gap: 12px; padding: 14px 14px 10px; }
+.cq-room-no { flex: none; width: 52px; height: 52px; border-radius: 16px; background: var(--ui-primary); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
+.cq-room-no small { font-size: 11px; opacity: .85; }
+.cq-room-no b { font-size: 22px; margin-top: 2px; max-width: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cq-room.empty .cq-room-no { background: var(--ui-line-soft); color: var(--ui-muted); }
+.cq-room-who { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.cq-room-doc { font-size: 17px; font-weight: 700; line-height: 1.3; padding-top: 2px; }
+.cq-room-sel { width: 100%; max-width: 100%; box-sizing: border-box; padding: 4px 26px 4px 6px; margin-left: -6px; border: 1px solid transparent; border-radius: 10px; font: inherit; font-size: 17px; font-weight: 700; color: var(--ui-ink); background-color: transparent; cursor: pointer; text-overflow: ellipsis;
+    -webkit-appearance: none; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2356645F' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9.5l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 6px center; }
+.cq-room-sel:hover { border-color: var(--ui-line); background-color: var(--ui-ground); }
+.cq-room-sel:focus-visible { outline: 3px solid var(--ui-focus); outline-offset: 1px; }
+.cq-room-sel.empty { margin-left: 0; padding: 10px 30px 10px 12px; border: 1px solid var(--ui-primary); color: var(--ui-primary-ink); font-size: 15px; font-weight: 600; background-color: var(--ui-surface); }
+.cq-room-sel.empty:hover { background-color: var(--ui-primary-tint); }
+.cq-room.empty .cq-room-head { align-items: center; padding: 14px; }
+.cq-room-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.cq-mchip { padding: 2px 8px; border-radius: 8px; background: var(--ui-line-soft); color: var(--ui-ink-2); font-size: 12px; white-space: nowrap; }
+.cq-mchip.bad { background: var(--cq-r-bg); color: #A21F14; font-weight: 600; }
+.cq-mchip.warn { background: var(--cq-y-bg); color: #7A4508; }
+.cq-mchip.pick { background: var(--ui-primary-tint); color: var(--ui-primary-ink); font-weight: 600; }
+.cq-room-n { flex: none; display: flex; flex-direction: column; align-items: flex-end; line-height: 1; }
+.cq-room-n b { font-size: 34px; }
+.cq-room-n span { font-size: 12px; color: var(--ui-muted); margin-top: 3px; }
+.cq-mchip.ok { background: var(--cq-g-bg); color: #13603F; font-weight: 600; }
+
+/* เลือกช่วงเวลา: มาแล้ว/ตรวจแล้ว ในช่วงที่เลือก (นับตามเวลามาถึง) */
+.cq-slotbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0 0 14px; }
+.cq-slotbar:empty { display: none; }
+.cq-slotbar-label { font-size: 14px; font-weight: 600; color: var(--ui-ink-2); }
+.cq-slotbar-btns { display: flex; gap: 6px; overflow-x: auto; max-width: 100%; padding: 2px; scrollbar-width: thin; }
+.cq-slotbtn { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 12px; border-radius: 19px; border: 1px solid var(--ui-line); background: var(--ui-surface); color: var(--ui-ink-2); font: inherit; font-size: 14px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.cq-slotbtn:not(.past):not(.now):not([aria-checked="true"]) { color: var(--ui-muted); }
+.cq-slotbtn small { padding: 1px 6px; border-radius: 8px; background: var(--cq-g-bg); color: #13603F; font-size: 11px; font-weight: 600; }
+.cq-slotbtn:hover { border-color: var(--ui-primary); }
+.cq-slotbtn[aria-checked="true"] { background: var(--ui-primary); border-color: var(--ui-primary); color: #fff; font-weight: 600; }
+.cq-slotbtn[aria-checked="true"] small { background: rgba(255,255,255,.25); color: #fff; }
+.cq-slotbtn:focus-visible { outline: 3px solid var(--ui-focus); outline-offset: 1px; }
+.cq-slotbar-sum { font-size: 14px; color: var(--ui-ink-2); }
+.cq-slotbar-sum b { font-size: 17px; color: var(--ui-ink); }
+.cq-slotline { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 0 14px 10px; padding: 6px 8px; border-radius: 10px; background: var(--ui-ground); }
+.cq-slotline-t { font-size: 12px; font-weight: 600; color: var(--ui-ink-2); margin-right: 2px; font-variant-numeric: tabular-nums; }
+
+.cq-rp-list { list-style: none; margin: 0; padding: 0 10px 10px; max-height: 62vh; overflow-y: auto; }
+.cq-rp { display: flex; gap: 10px; align-items: center; padding: 8px; border-radius: 12px; }
+.cq-rp + .cq-rp { margin-top: 2px; }
+.cq-rp.next { background: var(--ui-primary-tint); }
+.cq-rp-q { flex: none; width: 48px; display: flex; flex-direction: column; align-items: center; line-height: 1; padding: 6px 0; border-radius: 10px; background: var(--ui-ground); }
+.cq-rp-q small { font-size: 10px; color: var(--ui-muted); }
+.cq-rp-q b { font-size: 17px; margin-top: 2px; }
+.cq-rp.next .cq-rp-q { background: var(--ui-primary); color: #fff; }
+.cq-rp.next .cq-rp-q small { color: rgba(255,255,255,.85); }
+.cq-rp-body { min-width: 0; flex: 1; }
+.cq-rp-top { display: flex; align-items: center; gap: 6px; }
+.cq-rp-name { font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cq-rp-tag { flex: none; padding: 1px 7px; border-radius: 7px; background: var(--ui-primary); color: #fff; font-size: 11px; font-weight: 600; }
+.cq-rp-sub { font-size: 12px; color: var(--ui-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cq-rp-pend { font-size: 12px; color: #7A4508; }
+.cq-rp.old { opacity: .5; }
+.cq-room-free { display: flex; align-items: center; gap: 8px; margin: 0 14px 14px; padding: 10px 12px; border-radius: 12px; background: var(--cq-g-bg); color: #13603F; font-size: 14px; }
+.cq-room-free-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cq-g); }
+
+.cq-others { margin-top: 16px; padding: 12px 14px; border-radius: 16px; background: var(--ui-surface); border: 1px solid var(--ui-line); display: flex; flex-direction: column; gap: 10px; }
+.cq-others-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.cq-others-label { font-size: 13px; font-weight: 600; color: var(--ui-ink-2); margin-right: 4px; }
+.cq-others-label.warn { color: #7A4508; }
+.cq-others-hint { font-size: 13px; color: var(--ui-muted); }
+a.cq-others-hint { color: var(--ui-primary-ink); font-weight: 600; }
+.cq-dchip { display: inline-flex; align-items: center; gap: 8px; padding: 5px 6px 5px 12px; border-radius: 20px; background: var(--ui-ground); border: 1px solid var(--ui-line); font-size: 14px; scroll-margin-top: 90px; }
+.cq-dchip b { min-width: 24px; padding: 2px 7px; border-radius: 12px; background: var(--ui-surface); text-align: center; font-size: 13px; }
+.cq-dchip.warn { background: var(--cq-y-bg); border-color: #F1D9A8; }
+.cq-dchip.focus { outline: 3px solid var(--ui-focus); }
+.cq-room-pickname { position: relative; display: flex; align-items: flex-start; gap: 4px; margin: -2px -6px 0; padding: 2px 6px; border-radius: 10px; cursor: pointer; }
+.cq-room-pickname:hover { background: var(--ui-ground); }
+.cq-room-pickname:focus-within { outline: 3px solid var(--ui-focus); outline-offset: 1px; }
+.cq-room-pickname .cq-room-doc { padding-top: 0; }
+.cq-room-caret { flex: none; font-size: 13px; color: var(--ui-muted); margin-top: 3px; }
+.cq-room-sel.overlay { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.cq-room-pickname .cq-room-doc { flex: 1; min-width: 0; text-align: left; }
+/* คิวยาว: 3 คนแรกเต็ม ที่เหลือบรรทัดเดียว · กล่องเลื่อนในตัวพร้อมเงาจางด้านล่าง */
+.cq-rp-wrap { position: relative; }
+.cq-rp-wrap .cq-rp-list { max-height: min(62vh, 640px); }
+.cq-rp-wrap.more::after { content: ""; position: absolute; left: 0; right: 0; bottom: 30px; height: 36px; pointer-events: none; background: linear-gradient(to bottom, rgba(255,255,255,0), var(--ui-surface)); }
+.cq-room.paused .cq-rp-wrap.more::after { background: linear-gradient(to bottom, rgba(241,243,242,0), var(--cq-x-bg)); }
+.cq-rp-foot { padding: 6px 14px 10px; font-size: 12px; color: var(--ui-muted); text-align: center; border-top: 1px solid var(--ui-line-soft); }
+.cq-rp-sep { margin: 8px 4px 2px; padding-top: 6px; border-top: 1px solid var(--ui-line-soft); font-size: 12px; font-weight: 600; color: var(--ui-muted); }
+.cq-rpc { display: flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: 8px; font-size: 14px; line-height: 1.35; }
+.cq-rpc:nth-child(odd) { background: var(--ui-ground); }
+.cq-rpc-i { flex: none; width: 18px; text-align: right; font-size: 11px; color: var(--ui-muted); }
+.cq-rpc-q { flex: none; min-width: 34px; font-size: 14px; color: var(--ui-primary-ink); }
+.cq-rpc-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cq-rpc-wait { flex: none; font-size: 12px; color: var(--ui-muted); white-space: nowrap; }
+.cq-rpc.old { opacity: .5; }
+.cq-rpc.pend .cq-rpc-wait { color: #7A4508; }
+.cq-rp-wrap .cq-rp-list.top { max-height: none; overflow: visible; padding-bottom: 4px; }
+.cq-rp-wrap .cq-rp-list.rest { max-height: 290px; overflow-y: auto; padding-top: 0; }
+.cq-rp-wrap > .cq-rp-sep { margin: 2px 14px 4px; }
+.cq-rp-tag.stale { background: #E4E7E6; color: #5B6763; }
+.cq-rp.old, .cq-rpc.old, .cq-pt.old { opacity: .6; }
+.cq-stale-note { margin: -4px 0 12px; padding: 8px 12px; border-radius: 10px; background: var(--ui-line-soft); font-size: 13px; color: var(--ui-ink-2); }
+.cq-room-stat { display: flex; align-items: center; gap: 10px; }
+.cq-room-stat .cq-room-n { flex-direction: row; align-items: baseline; gap: 4px; }
+.cq-room-stat .cq-room-n span { margin-top: 0; font-size: 13px; }
+.cq-room-stat .cq-room-chips { flex: 1; min-width: 0; }
+.cq-room-mismatch { margin: 0 14px 10px; padding: 8px 10px; border-radius: 10px; background: var(--cq-y-bg); border: 1px solid #F1D9A8; color: #7A4508; font-size: 13px; line-height: 1.45; }
+.cq-room-mismatch b { font-weight: 700; }
+.cq-room.empty .cq-room-chips { margin-top: 4px; }
+
+/* กำลังพบแพทย์ (ห้องเรียกแล้ว ยังไม่บันทึกผลตรวจ) */
+.cq-inexam { margin: 0 10px 10px; padding: 8px 10px 10px; border-radius: 14px; background: var(--ui-primary); color: #fff; height: 104px; box-sizing: border-box; overflow: hidden; }
+.cq-inexam-h { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: .02em; opacity: .9; margin-bottom: 6px; }
+.cq-inexam-h::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #7CF0B8; box-shadow: 0 0 0 0 rgba(124,240,184,.6); animation: cq-pulse 2s infinite; }
+.cq-inexam-row { display: flex; align-items: center; gap: 10px; }
+.cq-inexam-row + .cq-inexam-row { margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,.2); }
+.cq-inexam-q { flex: none; width: 48px; display: flex; flex-direction: column; align-items: center; line-height: 1; padding: 6px 0; border-radius: 10px; background: rgba(255,255,255,.18); }
+.cq-inexam-q small { font-size: 10px; opacity: .85; }
+.cq-inexam-q b { font-size: 20px; margin-top: 2px; }
+.cq-inexam-body { min-width: 0; }
+.cq-inexam-name { display: block; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cq-inexam-sub { font-size: 12px; opacity: .9; }
+.cq-inexam-note { margin-top: 6px; font-size: 11px; opacity: .85; }
+.cq-room-free.busy { background: var(--ui-line-soft); color: var(--ui-ink-2); }
+@media (prefers-reduced-motion: reduce) { .cq-inexam-h::before { animation: none; } }
+
+/* การ์ดห้องสูงตรงกัน: ชื่อแพทย์จอง 2 บรรทัด · กล่องพบแพทย์/ช่วงเวลาสูงคงที่ · ส่วนที่สูงไม่เท่ากันอยู่ท้ายการ์ด */
+.cq-room-side { flex: none; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.cq-room-pickbadge { padding: 2px 6px; border-radius: 8px; background: var(--ui-primary-tint); color: var(--ui-primary-ink); font-size: 11px; font-weight: 700; white-space: nowrap; }
+.cq-room:not(.empty) .cq-room-who .cq-room-doc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.6em; }
+.cq-room-stat { min-height: 40px; }
+.cq-room-stat .cq-room-chips { flex-wrap: nowrap; overflow: hidden; }
+.cq-inexam.idle { background: var(--ui-ground); color: var(--ui-muted); border: 1px dashed var(--ui-line); }
+.cq-inexam.idle .cq-inexam-h::before { background: var(--ui-line); animation: none; box-shadow: none; }
+.cq-inexam-idle { display: flex; align-items: center; height: 56px; font-size: 13px; }
+.cq-slotline { display: block; }
+.cq-slotline-t { display: block; margin: 0 0 4px; }
+.cq-slotcells { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+.cq-slotcell { display: flex; flex-direction: column; align-items: center; padding: 4px 2px; border-radius: 8px; background: var(--ui-surface); line-height: 1.15; min-width: 0; }
+.cq-slotcell b { font-size: 16px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cq-slotcell span { font-size: 11px; color: var(--ui-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.cq-slotcell.ok b { color: #13603F; }
+.cq-slotcell.bad { background: var(--cq-r-bg); } .cq-slotcell.bad b { color: #A21F14; }
+.cq-slotcell.warn { background: var(--cq-y-bg); } .cq-slotcell.warn b { color: #7A4508; font-size: 14px; }
+.cq-room-note { margin: 0 14px 12px; font-size: 12px; color: var(--ui-ink-2); }
+.cq-room > .cq-room-mismatch { margin-top: 0; }

@@ -1,0 +1,6 @@
+<?php
+// [SSO] ค่าลับของระบบนี้ — คัดลอกเป็น config.local.php (scripts/register_app.php เขียนให้อัตโนมัติ) และห้าม commit
+return [
+    'client_secret' => '',
+    // 'db' => ['user' => 'app_user', 'pass' => '...'],
+];

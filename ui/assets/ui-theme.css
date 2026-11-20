@@ -1,0 +1,18 @@
+/* ADAPT: สีของระบบนี้ ไม่ถูกทับตอน --upgrade — ทุกสีในชุดอ้างจากตัวแปรเหล่านี้ */
+:root {
+    --ui-primary: #0B6B5D;
+    --ui-primary-hover: #095A4E;
+    --ui-primary-tint: #E3F1EE;
+    --ui-primary-ink: #0B5A4E;
+    --ui-ink: #12201D;
+    --ui-ink-2: #3E4B47;
+    --ui-muted: #56645F;
+    --ui-ground: #F4F6F5;
+    --ui-surface: #FFFFFF;
+    --ui-line: #DCE3E0;
+    --ui-line-soft: #EAEFED;
+    --ui-field: #B9C5C1;
+    --ui-focus: #7CC4B6;
+    --ui-backdrop: rgba(14, 43, 39, .55);
+    /* --ui-nav-bg: #0F2A24;  สีแถบเมนู ถ้าไม่ตั้งจะใช้ --ui-primary-ink */
+}

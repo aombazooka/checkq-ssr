@@ -1,0 +1,7 @@
+# [SSO] เปิดให้เข้าจากเว็บได้เฉพาะ 4 ไฟล์นี้ ไฟล์อื่น (config, hooks, SsoClient) ห้ามเข้า
+<FilesMatch ".*">
+    Require all denied
+</FilesMatch>
+<FilesMatch "^(callback|backchannel|check|start)\.php$">
+    Require all granted
+</FilesMatch>
